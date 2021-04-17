@@ -1,6 +1,6 @@
 let mongoose = require('mongoose');
 
-let PostSchema = new mongoose.Schema({
+let postSchema = mongoose.Schema({
     title: {
         type: String,
         required: true
@@ -12,7 +12,11 @@ let PostSchema = new mongoose.Schema({
     date: {
         type: Date,
         default: Date.now
-    } 
+    },
+    category: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Category'
+      }
 })
 
-module.exports = mongoose.model("Post", PostSchema);
+module.exports = mongoose.model("Post", postSchema);

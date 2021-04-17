@@ -1,10 +1,13 @@
 const express = require("express");
 const app = express();
-const router = require("./router");
+const postsRouter = require("./routers/posts-router");
+const categoriesRouter = require("./routers/categories-router");
 const mongoose = require("mongoose");
 
 app.use(express.json());
-app.use("/", router);
+
+app.use("/posts", postsRouter);
+app.use("/categories", categoriesRouter);
 
 require("dotenv").config();
 
