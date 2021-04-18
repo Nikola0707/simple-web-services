@@ -1,7 +1,7 @@
 let mongoose = require('mongoose');
 
 let categoriesSchema = mongoose.Schema({
-    name: {
+    title: {
         type: String,
         require: ['Please provide title of the category!']
     }

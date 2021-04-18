@@ -3,18 +3,18 @@ const successResponse = require('../services/success-response-sender');
 const errorResponse = require('../services/error-response-sender');
 
 module.exports = {
-  getAll: async (req, res) => {
-    try {
-      const posts = await Post.find().populate('Category', 'name');
-      successResponse(res, 'This is a list of all posts!', posts);
-    } catch (error) {
-      errorResponse(res, 500, error.message)
-    }
-  },
   create: async (req, res) => {
     try {
       const post = await Post.create(req.body);
       successResponse(res, 'New post is created!', post)
+    } catch (error) {
+      errorResponse(res, 500, error.message)
+    }
+  },
+  getAll: async (req, res) => {
+    try {
+      const posts = await Post.find().populate('category', 'title');
+      successResponse(res, 'This is a list of all posts!', posts);
     } catch (error) {
       errorResponse(res, 500, error.message)
     }
@@ -47,7 +47,7 @@ module.exports = {
   deleteById: async (req, res) => {
     try {
       const post = await Post.remove({ _id: req.params.id });
-      res.send(post);
+      res.send(`Post with id: #${req.params.id} is deleted!`);
     } catch (error) {
       res.send({ message: error });
     }
